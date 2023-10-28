@@ -41,6 +41,10 @@ input {
 
             input {
                 border: 1px solid rgb(119, 119, 119);
+
+                &.ng-touched.ng-invalid {
+                    border-color: red;
+                }
             }
         }
 
