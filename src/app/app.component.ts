@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './auth/services/user.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadUser, removeUser } from './store/user/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Sensors-FE';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
 
     if(token) {
-      this.userService.loadRole().subscribe({
-        next: () => this.router.navigateByUrl('/')
-      });
+      this.store.dispatch(loadUser());
+    } else {
+      this.store.dispatch(removeUser());
     }
   }
 }

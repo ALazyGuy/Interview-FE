@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, mergeMap, take, tap } from 'rxjs';
+import { mergeMap, of, tap } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 import { LoginRequest } from '../models/login-request';
+import { Store } from '@ngrx/store';
+import { loadUser } from 'src/app/store/user/user.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {  
 
-  role: string | null = null;
-
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private store: Store) { }
 
   authenticate(request: LoginRequest) {
     return this.apiService.sendAuthRequest(request).pipe(
-      take(1), 
       tap(value => localStorage.setItem('token', value.token)),
-      mergeMap(value => this.loadRole()));
+      mergeMap(() => of(this.store.dispatch(loadUser()))));
   }
 
   loadRole() {
-    return this.apiService.loadRole().pipe(
-      take(1),
-      tap(value => this.role = value.role),
-    );
+    return this.apiService.loadRole();
   }
 
 }

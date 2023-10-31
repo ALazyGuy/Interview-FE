@@ -20,7 +20,7 @@ export class LoginPageComponent {
         password: this.formGroup.controls['password'].value
       };
       this.userService.authenticate(request).subscribe({
-        next: () => this.router.navigateByUrl('/')
+        next: () => this.router.navigateByUrl('sensors')
       });
     }
   }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { JwtResponse } from 'src/app/auth/models/jwt-response';
 import { LoginRequest } from 'src/app/auth/models/login-request';
 import { RoleResponse } from 'src/app/auth/models/role-response';
+import { SensorsResponse } from 'src/app/sensors/models/sensors-response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class ApiService {
 
   loadRole(): Observable<RoleResponse> {
     return this.http.get<RoleResponse>('user/role');
+  }
+
+  loadSensors(): Observable<SensorsResponse> {
+    return this.http.get<SensorsResponse>('sensor/load');
   }
 
 }
