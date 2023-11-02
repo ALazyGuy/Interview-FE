@@ -1,3 +1,17 @@
-<div *ngFor="let sensor of sensors$ | async">
-    {{ sensor.name }}
+<div class="container">
+    <div class="search-container">
+        <input type="text">
+        <button>Search</button>
+    </div>
+    <div class="sensors">
+        <div class="headers">
+            <span>Name</span>
+            <span>Model</span>
+            <span>Type</span>
+            <span>Range</span>
+            <span>Unit</span>
+            <span>Location</span>
+        </div>
+        <app-sensor *ngFor="let sensor of sensors$ | async" [sensor]="sensor"></app-sensor>
+    </div>
 </div>

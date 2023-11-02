@@ -1,0 +1,25 @@
+.sensor-data {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+span {
+    flex: 1;
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    font-weight: bold;
+    background-color: antiquewhite;
+}
+
+.sensor-popup-link {
+    text-decoration: underline;
+    color: blue;
+    font-weight: normal;
+
+    &:hover {
+        cursor: pointer;
+        color: rgb(144, 144, 247);
+    }
+}
