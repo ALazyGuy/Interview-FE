@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { loadSensors, loadSensorsFailure, loadSensorsSuccess } from "./sensor.actions";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, map, of, switchMap, tap } from "rxjs";
 import { ApiService } from "src/app/core/services/api.service";
 
 @Injectable()

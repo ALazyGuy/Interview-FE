@@ -14,8 +14,9 @@ export class AnonymouseGuard{
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const token = localStorage.getItem('token') !== null;
     return this.store.select(statusSelector).pipe(
-      skipWhile(status => status === 'loading'),
+      skipWhile(status => ((status === 'loading') && token)),
       map(status => status === 'not-loaded'),
       tap(isNotLoaded => !isNotLoaded && this.router.navigateByUrl('sensors')));
   }

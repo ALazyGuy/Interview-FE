@@ -7,5 +7,5 @@ export interface UserState {
 
 export const initialUserState: UserState = {
     role: null,
-    loadingStatus: 'loaded'
+    loadingStatus: 'loading'
 };

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { loadUser, loadUserSuccess, removeUser } from "./user.actions";
-import { catchError, map, of, switchMap, tap } from "rxjs";
+import { catchError, empty, map, of, switchMap, tap } from "rxjs";
 import { UserService } from "src/app/auth/services/user.service";
 
 @Injectable()

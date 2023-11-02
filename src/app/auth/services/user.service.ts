@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mergeMap, of, tap } from 'rxjs';
+import { catchError, mergeMap, of, tap } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 import { LoginRequest } from '../models/login-request';
 import { Store } from '@ngrx/store';

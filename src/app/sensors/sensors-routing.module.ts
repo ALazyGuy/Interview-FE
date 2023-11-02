@@ -4,7 +4,7 @@ import { SensorsPageComponent } from './components/sensors-page/sensors-page.com
 import { AuthenticatedGuard } from '../auth/guards/authenticated.guard';
 
 const routes: Routes = [
-  {path: '', component: SensorsPageComponent}
+  {path: '', component: SensorsPageComponent, canActivate: [AuthenticatedGuard]}
 ];
 
 @NgModule({
