@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { SensorsRoutingModule } from './sensors-routing.module';
 import { SensorsPageComponent } from './components/sensors-page/sensors-page.component';
 import { SensorComponent } from './components/sensor/sensor.component';
+import { SensorPopupComponent } from './components/sensor-popup/sensor-popup.component';
 
 
 @NgModule({
   declarations: [
     SensorsPageComponent,
-    SensorComponent
+    SensorComponent,
+    SensorPopupComponent
   ],
   imports: [
     CommonModule,

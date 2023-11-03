@@ -22,3 +22,6 @@ export class AppComponent implements OnInit {
     }
   }
 }
+
+
+//TODO Change color for sensors table header
