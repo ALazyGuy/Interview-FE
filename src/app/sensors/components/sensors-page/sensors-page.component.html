@@ -1,4 +1,5 @@
 <div class="user-actions">
+    <h1>Sensors table</h1>
     <span class="logout" (click)="logout()">Logout</span>
 </div>
 <div class="container">
@@ -6,7 +7,7 @@
         <input type="text">
         <button>Search</button>
     </div>
-    <div class="sensors">
+    <div class="sensors" *ngIf="sensors$ | async as sensors">
         <div class="headers">
             <span>Name</span>
             <span>Model</span>
@@ -15,7 +16,18 @@
             <span>Unit</span>
             <span>Location</span>
         </div>
-        <app-sensor *ngFor="let sensor of sensors$ | async" [sensor]="sensor"></app-sensor>
+        <app-sensor *ngFor="let sensor of sensors" [sensor]="sensor" (onClick)="openDialog($event)"></app-sensor>
+    </div>
+    <div class="actions">
+        <button (click)="openCreationDialog()">Add Sensor</button>
+        <div class="paging" *ngIf="total$ | async as total">
+            <div class="buttons">
+                <button (click)="previousPage()">Previous</button>
+                <button *ngFor="let _ of countPages(total); let i = index" (click)="selectPage(i)">{{ i + 1 }}</button>
+                <button (click)="nextPage(total)">Next</button>
+            </div>
+            <span>Total: {{ total }}</span>
+        </div>
     </div>
 </div>
-<app-sensor-popup></app-sensor-popup>
+<app-sensor-popup [isOpen]="isDialogOpen" (onCancel)="cancelDialog()" [sensor]="selectedSensor"></app-sensor-popup>

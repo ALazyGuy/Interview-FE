@@ -1,51 +1,53 @@
-<div class="container">
-    <h1>Add/edit</h1>
-
-    <form>
-        <div class="input required">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Name">
-        </div>
-        <div class="input required">
-            <label for="model">Model</label>
-            <input type="text" id="model" placeholder="Model">
-        </div>
-        <div class="input range">
-            <label for="from">Range</label>
-            <div class="ranges">
-                <div class="from">
-                    <input type="number" id="from" placeholder="10">
-                </div>
-                <div class="to">
-                    <input type="number" id="to" placeholder="20">
+<div class="wrapper" *ngIf="isOpen">
+    <div class="container">
+        <h1>Add/edit</h1>
+    
+        <form>
+            <div class="input required">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Name" [value]="sensor?.name">
+            </div>
+            <div class="input required">
+                <label for="model">Model</label>
+                <input type="text" id="model" placeholder="Model" [value]="sensor?.model">
+            </div>
+            <div class="input range">
+                <label for="from">Range</label>
+                <div class="ranges">
+                    <div class="from">
+                        <input type="number" id="from" placeholder="10" [value]="sensor?.from">
+                    </div>
+                    <div class="to">
+                        <input type="number" id="to" placeholder="20" [value]="sensor?.to">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="input required">
-            <label for="type">Type</label>
-            <select type="text" id="type">
-                <option value="val1">Value1</option>
-                <option value="val2">Value2</option>
-            </select>
-        </div>
-        <div class="input required">
-            <label for="unit">Unit</label>
-            <select type="text" id="unit">
-                <option value="val1">Value1</option>
-                <option value="val2">Value2</option>
-            </select>
-        </div>
-        <div class="input">
-            <label for="location">Location</label>
-            <input type="text" id="location" placeholder="Location">
-        </div>
-        <div class="input">
-            <label for="description">Description</label>
-            <textarea type="text" id="description" placeholder="Description"></textarea>
-        </div>
-        <div class="controls">
-            <button>Save</button>
-            <button>Cancel</button>
-        </div>
-    </form>
+            <div class="input required">
+                <label for="type">Type</label>
+                <select type="text" id="type">
+                    <option value="Pressure">Pressure</option>
+                    <option value="val2">Value2</option>
+                </select>
+            </div>
+            <div class="input required">
+                <label for="unit">Unit</label>
+                <select type="text" id="unit">
+                    <option value="val2">Value2</option>
+                    <option value="bar">bar</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Location" [value]="sensor?.location">
+            </div>
+            <div class="input">
+                <label for="description">Description</label>
+                <textarea type="text" id="description" placeholder="Description" [value]="sensor?.description"></textarea>
+            </div>
+            <div class="controls">
+                <button>Save</button>
+                <button (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>

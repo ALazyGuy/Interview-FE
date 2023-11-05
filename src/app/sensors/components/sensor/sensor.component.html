@@ -1,5 +1,5 @@
 <div class="sensor-data">
-    <span class="sensor-popup-link">{{ sensor.name }}</span>
+    <span class="sensor-popup-link" (click)="open()">{{ sensor.name }}</span>
     <span>{{ sensor.model }}</span>
     <span>{{ sensor.type }}</span>
     <span>{{ sensor.from }} - {{ sensor.to }}</span>

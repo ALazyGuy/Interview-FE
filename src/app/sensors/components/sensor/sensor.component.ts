@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Sensor } from 'src/app/store/sensor/sensor.model';
 
 @Component({
@@ -10,5 +10,11 @@ export class SensorComponent {
 
   @Input()
   sensor!: Sensor;
+  @Output()
+  onClick = new EventEmitter<Sensor>();
+
+  open() {
+    this.onClick.emit(this.sensor);
+  }
 
 }

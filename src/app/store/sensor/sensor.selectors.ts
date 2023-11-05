@@ -6,3 +6,8 @@ export const selectAllSensors = createSelector(
     selectSensors,
     (state: SensorState) => state.sensors
 );
+
+export const selectTotalSensors = createSelector(
+    selectSensors,
+    (state: SensorState) => state.total
+);
