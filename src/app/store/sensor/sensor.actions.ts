@@ -3,7 +3,7 @@ import { Sensor } from "./sensor.model";
 
 export const loadSensors = createAction(
     '[Sensors] Load',
-    props<{page: number}>());
+    props<{page: number, searchString: string}>());
 export const loadSensorsSuccess = createAction(
     '[Sensors] Load success',
     props<{loadedSensors: Sensor[], total: number}>());

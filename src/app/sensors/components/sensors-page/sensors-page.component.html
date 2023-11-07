@@ -4,8 +4,8 @@
 </div>
 <div class="container">
     <div class="search-container">
-        <input type="text">
-        <button>Search</button>
+        <input type="text" [(ngModel)]="searchString">
+        <button (click)="selectPage(0)">Search</button>
     </div>
     <div class="sensors" *ngIf="sensors$ | async as sensors">
         <div class="headers">
@@ -17,6 +17,10 @@
             <span>Location</span>
         </div>
         <app-sensor *ngFor="let sensor of sensors" [sensor]="sensor" (onClick)="openDialog($event)"></app-sensor>
+        <div class="empty" *ngIf="sensors.length === 0">
+            <span>No data found</span>
+            <button (click)="clearQuery()">Clear query string</button>
+        </div>
     </div>
     <div class="actions">
         <button (click)="openCreationDialog()">Add Sensor</button>

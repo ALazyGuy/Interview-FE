@@ -12,7 +12,7 @@ export class SensorEffects {
     loadSensors$ = createEffect(() =>
         this.actions$.pipe(
             ofType(loadSensors),
-            switchMap(action => this.apiService.loadSensors(action.page).pipe(
+            switchMap(action => this.apiService.loadSensors(action.page, action.searchString).pipe(
                 map(response => loadSensorsSuccess({loadedSensors: response.sensors, total: response.total})),
                 catchError(error => of(loadSensorsFailure({error: error})))
             ))

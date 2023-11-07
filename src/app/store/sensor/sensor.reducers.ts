@@ -14,5 +14,7 @@ export const SensorReducer = createReducer(
     on(loadSensorsFailure, (state, {error}) => ({
         ...state, 
         loading: false, 
+        sensors: [],
+        total: 0,
         error: error}))
 );

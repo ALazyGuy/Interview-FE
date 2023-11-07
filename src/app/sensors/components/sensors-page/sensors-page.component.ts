@@ -22,6 +22,16 @@ export class SensorsPageComponent implements OnInit {
   selectedSensor: Sensor | null = null;
   page: number = 0;
 
+  searchString: string = '';
+
+  /*
+    This variable was added for bug fix.
+    In case user searched for sensors and got more than one page,
+    then changes value of searchString in search input and select page 2,
+    but new searchString has less than 2 pages he will get empty result
+  */
+  lastSearchedValue: string = '';
+
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
@@ -69,12 +79,24 @@ export class SensorsPageComponent implements OnInit {
   }
 
   selectPage(page: number) {
-    this.page = page;
+    if(this.searchString === this.lastSearchedValue) {
+      this.page = page;
+    } else {
+      this.page = 0;
+    }
+    this.loadSensorsByPage();
+  }
+
+  clearQuery() {
+    this.searchString = '';
+    this.lastSearchedValue = '';
+    this.page = 0;
     this.loadSensorsByPage();
   }
 
   private loadSensorsByPage() {
-    this.store.dispatch(loadSensors({page: this.page}));
+    this.lastSearchedValue = this.searchString;
+    this.store.dispatch(loadSensors({page: this.page, searchString: this.searchString}));
   }
 
 }

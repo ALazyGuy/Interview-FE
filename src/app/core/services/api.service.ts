@@ -21,8 +21,8 @@ export class ApiService {
     return this.http.get<RoleResponse>('user/role');
   }
 
-  loadSensors(page: number): Observable<SensorsResponse> {
-    return this.http.get<SensorsResponse>(`sensor/load?page=${page}`);
+  loadSensors(page: number, searchString: string): Observable<SensorsResponse> {
+    return this.http.get<SensorsResponse>(`sensor/search?page=${page}&searchString=${searchString}`);
   }
 
 }
