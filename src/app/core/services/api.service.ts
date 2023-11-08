@@ -25,4 +25,8 @@ export class ApiService {
     return this.http.get<SensorsResponse>(`sensor/search?page=${page}&searchString=${searchString}`);
   }
 
+  deleteSensor(id: number): Observable<any> {
+    return this.http.delete(`sensor/delete/${id}`);
+  }
+
 }

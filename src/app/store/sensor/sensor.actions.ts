@@ -10,3 +10,7 @@ export const loadSensorsSuccess = createAction(
 export const loadSensorsFailure = createAction(
     '[Sensors] Load failure',
     props<{error: string}>());
+export const deleteSensor = createAction(
+    '[Sensors] Delete',
+    props<{id: number, searchString: string}>()
+);

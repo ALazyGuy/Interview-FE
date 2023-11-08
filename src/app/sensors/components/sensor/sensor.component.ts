@@ -10,11 +10,19 @@ export class SensorComponent {
 
   @Input()
   sensor!: Sensor;
+  @Input()
+  role!: string;
   @Output()
-  onClick = new EventEmitter<Sensor>();
+  onEdit = new EventEmitter<Sensor>();
+  @Output()
+  onRemove = new EventEmitter<Sensor>();
 
-  open() {
-    this.onClick.emit(this.sensor);
+  edit() {
+    this.onEdit.emit(this.sensor);
+  }
+
+  remove() {
+    this.onRemove.emit(this.sensor);
   }
 
 }

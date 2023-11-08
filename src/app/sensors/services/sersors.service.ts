@@ -10,9 +10,12 @@ export class SersorsService {
 
   constructor(private apiService: ApiService) { }
 
-  loadSensors(page: number): Observable<SensorsResponse> {
-    return this.apiService.loadSensors(page);
+  loadSensors(page: number, searchString: string): Observable<SensorsResponse> {
+    return this.apiService.loadSensors(page, searchString);
   }
 
-  
+  deleteSensor(id: number): Observable<any> {
+    return this.apiService.deleteSensor(id);
+  }
+
 }

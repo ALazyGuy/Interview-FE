@@ -13,13 +13,33 @@ span {
     background-color: antiquewhite;
 }
 
-.sensor-popup-link {
+.sensor-name {
     text-decoration: underline;
     color: blue;
     font-weight: normal;
+}
 
-    &:hover {
-        cursor: pointer;
-        color: rgb(144, 144, 247);
+img {
+    width: 20px;
+    height: 20px;
+}
+
+.container {
+    position: relative;
+}
+
+button {
+    position: absolute;
+    padding-top: 5px;
+    cursor: pointer;
+
+    &.edit {
+        left: -40px;
+        top: 5px;
+    }
+
+    &.close {
+        right: -40px;
+        top: 5px;
     }
 }

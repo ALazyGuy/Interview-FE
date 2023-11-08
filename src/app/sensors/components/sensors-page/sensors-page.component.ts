@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadSensors } from 'src/app/store/sensor/sensor.actions';
+import { deleteSensor, loadSensors } from 'src/app/store/sensor/sensor.actions';
 import { Sensor } from 'src/app/store/sensor/sensor.model';
 import { selectAllSensors, selectTotalSensors } from 'src/app/store/sensor/sensor.selectors';
 import { removeUser } from 'src/app/store/user/user.actions';
@@ -45,6 +45,12 @@ export class SensorsPageComponent implements OnInit {
 
   openCreationDialog() {
     this.isDialogOpen = true;
+  }
+
+  removeSensor(sensor: Sensor) {
+    if(confirm(`Are you sure you want to remove sensor '${sensor.name}'?`)) {
+      this.store.dispatch(deleteSensor({id: sensor.id, searchString: this.searchString}));
+    }
   }
 
   cancelDialog() {

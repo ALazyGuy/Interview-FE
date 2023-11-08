@@ -2,7 +2,7 @@
     <h1>Sensors table</h1>
     <span class="logout" (click)="logout()">Logout</span>
 </div>
-<div class="container">
+<div class="container" *ngIf="role$ | async as role">
     <div class="search-container">
         <input type="text" [(ngModel)]="searchString">
         <button (click)="selectPage(0)">Search</button>
@@ -16,14 +16,18 @@
             <span>Unit</span>
             <span>Location</span>
         </div>
-        <app-sensor *ngFor="let sensor of sensors" [sensor]="sensor" (onClick)="openDialog($event)"></app-sensor>
+        <app-sensor *ngFor="let sensor of sensors" 
+            [sensor]="sensor" 
+            [role]="role" 
+            (onEdit)="openDialog($event)"
+            (onRemove)="removeSensor($event)"></app-sensor>
         <div class="empty" *ngIf="sensors.length === 0">
             <span>No data found</span>
             <button (click)="clearQuery()">Clear query string</button>
         </div>
     </div>
-    <div class="actions">
-        <button (click)="openCreationDialog()">Add Sensor</button>
+    <div class="actions" [style.justifyContent]="role === 'ROLE_VIEWER' ? 'flex-end' : 'space-between'">
+        <button (click)="openCreationDialog()" *ngIf="role === 'ROLE_ADMINISTRATOR'">Add Sensor</button>
         <div class="paging" *ngIf="total$ | async as total">
             <div class="buttons">
                 <button (click)="previousPage()">Previous</button>

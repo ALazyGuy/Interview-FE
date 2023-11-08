@@ -1,8 +1,16 @@
-<div class="sensor-data">
-    <span class="sensor-popup-link" (click)="open()">{{ sensor.name }}</span>
-    <span>{{ sensor.model }}</span>
-    <span>{{ sensor.type }}</span>
-    <span>{{ sensor.from }} - {{ sensor.to }}</span>
-    <span>{{ sensor.unit }}</span>
-    <span>{{ sensor.location }}</span>
+<div class="container">
+    <button class="edit" *ngIf="role === 'ROLE_ADMINISTRATOR'" (click)="edit()">
+        <img src="assets/pencil.png" alt="edit" width="20px" height="20px">
+    </button>
+    <div class="sensor-data">
+        <span class="sensor-name" [title]="sensor.description">{{ sensor.name }}</span>
+        <span>{{ sensor.model }}</span>
+        <span>{{ sensor.type }}</span>
+        <span>{{ sensor.from }} - {{ sensor.to }}</span>
+        <span>{{ sensor.unit }}</span>
+        <span>{{ sensor.location }}</span>
+    </div>
+    <button class="close" *ngIf="role === 'ROLE_ADMINISTRATOR'" (click)="remove()">
+        <img src="assets/close.png" alt="close" width="20px" height="20px">
+    </button>
 </div>
