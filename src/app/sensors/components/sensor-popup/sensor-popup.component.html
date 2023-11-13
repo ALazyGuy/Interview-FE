@@ -1,8 +1,8 @@
 <div class="wrapper" *ngIf="isOpen">
-    <div class="container" *ngIf="popupData$ | async as popupData">
+    <div class="container" *ngIf="popupData$ | async as popupData" #content>
         <h1>Add/edit</h1>
     
-        <form [formGroup]="formGroup" *ngIf="sensor$ | async as sensor">
+        <form [formGroup]="formGroup" *ngIf="sensor$ | async as sensor" (submit)="save()">
             <div class="input required">
                 <label for="name">Name</label>
                 <input type="text" id="name" placeholder="Name" formControlName="name">
@@ -47,10 +47,12 @@
                 <textarea type="text" id="description" placeholder="Description" formControlName="description"></textarea>
             </div>
             <div class="controls">
-                <button (click)="save()">Save</button>
-                <button (click)="cancel()">Cancel</button>
+                <button type="submit">Save</button>
+                <button type="button" (click)="cancel()">Cancel</button>
             </div>
-            <span *ngIf="error$ | async as error">{{ error }}</span>
+            <div class="errors" *ngIf="error$ | async as errors">
+                <span *ngFor="let error of errors" >{{ error }}</span>
+            </div>
         </form>
     </div>
 </div>

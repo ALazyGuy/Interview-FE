@@ -3,10 +3,11 @@
     <span class="logout" (click)="logout()">Logout</span>
 </div>
 <div class="container" *ngIf="role$ | async as role">
-    <div class="search-container">
-        <input type="text" [(ngModel)]="searchString">
-        <button (click)="selectPage(0)">Search</button>
-    </div>
+    <form class="search-container" (submit)="selectPage(0)">
+        <input type="text" name="search-string" [(ngModel)]="searchString">
+        <button type="submit">Search</button>
+        <button type="button" (click)="clearQuery()">Clear</button>
+    </form>
     <div class="sensors" *ngIf="sensors$ | async as sensors">
         <div class="headers">
             <span>Name</span>

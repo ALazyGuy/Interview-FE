@@ -24,8 +24,12 @@ export class SensorsService {
     return this.apiService.loadPopupData();
   }
 
-  updateSensor(id: number, body: SensorUpdateRequest): Observable<any> {
-    return this.apiService.updateSensor(id, body);
+  saveSensor(id: number, body: SensorUpdateRequest): Observable<any> {
+    if(id === -1) {
+      return this.apiService.createSensor(body);
+    } else {
+      return this.apiService.updateSensor(id, body);
+    }
   }
 
 }

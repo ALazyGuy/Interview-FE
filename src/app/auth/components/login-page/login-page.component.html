@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (submit)="login()">
         <div class="header">
             <h1>Login Form</h1>
             <span>enter login and password for access</span>
@@ -14,8 +14,9 @@
                 <input type="password" id="password" placeholder="Your password" formControlName="password">
             </div>
             <div class="login-button">
-                <input type="button" value="Login" (click)="login()">
+                <button type="submit" value="Login">Login</button>
             </div>
+            <span *ngIf="error$ | async" class="error">Invalid username or password</span>
         </div>
     </form>
 </div>

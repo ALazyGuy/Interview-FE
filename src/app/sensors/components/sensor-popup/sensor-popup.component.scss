@@ -40,6 +40,10 @@
             box-sizing: border-box;
             height: 25px;
             border-radius: 0px;
+
+            &.ng-touched.ng-invalid {
+                border-color: red;
+            }
         }
 
         &>textarea {
@@ -90,6 +94,10 @@
                 box-sizing: border-box;
                 width: 100px;
                 height: 25px;
+
+                &.ng-touched.ng-invalid {
+                    border-color: red;
+                }
             }
         }
     }
@@ -108,5 +116,11 @@
                 cursor: pointer;
             }
         }
+    }
+
+    .errors {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
     }
 }

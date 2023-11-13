@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
   formGroup: FormGroup = this.buildFormGroup();
+  error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private builder: FormBuilder, private userService: UserService, private router: Router) {}
 
@@ -20,9 +22,15 @@ export class LoginPageComponent {
         password: this.formGroup.controls['password'].value
       };
       this.userService.authenticate(request).subscribe({
-        next: () => this.router.navigateByUrl('sensors')
+        next: () => this.successLogin(),
+        error: () => this.error$.next(true)
       });
     }
+  }
+
+  private successLogin() {
+    this.error$.next(false);
+    this.router.navigateByUrl('sensors');
   }
 
   private validateForm(): boolean {

@@ -1,4 +1,4 @@
-input {
+input, button {
     width: 155px;
     box-sizing: border-box;
     height: 30px;
@@ -48,11 +48,19 @@ input {
             }
         }
 
+        .error {
+            display: block;
+            padding-top: 15px;
+            width: 100%;
+            color: red;
+            text-align: center;
+        }
+
         .login-button {
             display: flex;
             flex-direction: row-reverse;
 
-            &>input {
+            &>button {
                 font-weight: 600;
                 box-shadow: 0px 2px rgb(157, 157, 157);
             }

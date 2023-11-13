@@ -39,4 +39,8 @@ export class ApiService {
     return this.http.put(`sensor/${id}`, body);
   }
 
+  createSensor(body: SensorUpdateRequest): Observable<any> {
+    return this.http.post('sensor/create', body);
+  }
+
 }
