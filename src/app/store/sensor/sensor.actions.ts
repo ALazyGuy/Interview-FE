@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Sensor } from "./sensor.model";
+import { SensorUpdateRequest } from "src/app/sensors/models/sensor-update-request";
 
 export const loadSensors = createAction(
     '[Sensors] Load',
@@ -14,3 +15,9 @@ export const deleteSensor = createAction(
     '[Sensors] Delete',
     props<{id: number, searchString: string}>()
 );
+export const loadPopupData = createAction('[Sensors] Load popup data');
+export const loadPopupDataSuccess = createAction(
+    '[Sensors] Load popup data success',
+    props<{units: string[], types: string[]}>()
+);
+export const loadPopupDataError = createAction('[Sensors] Load popup data error');

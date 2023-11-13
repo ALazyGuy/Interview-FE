@@ -4,12 +4,14 @@ export interface SensorState {
     sensors: Sensor[];
     total: number;
     loading: boolean;
-    error: string | null;
+    units: string[];
+    types: string[];
 };
 
 export const initialSensorState: SensorState = {
     sensors: [],
     total: 0,
     loading: false,
-    error: null
+    units: [],
+    types: []
 };

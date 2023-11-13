@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { deleteSensor, loadSensors } from 'src/app/store/sensor/sensor.actions';
-import { Sensor } from 'src/app/store/sensor/sensor.model';
+import { EMPTY_SENSOR, Sensor } from 'src/app/store/sensor/sensor.model';
 import { selectAllSensors, selectTotalSensors } from 'src/app/store/sensor/sensor.selectors';
 import { removeUser } from 'src/app/store/user/user.actions';
 import { roleSelector } from 'src/app/store/user/user.selectors';
+import { SensorUpdateRequest } from '../../models/sensor-update-request';
+import { SensorsService } from '../../services/sersors.service';
 
 @Component({
   selector: 'app-sensors-page',
@@ -19,7 +22,8 @@ export class SensorsPageComponent implements OnInit {
   public role$ = this.store.select(roleSelector);
 
   isDialogOpen: boolean = false;
-  selectedSensor: Sensor | null = null;
+  selectedSensor$: BehaviorSubject<Sensor> = new BehaviorSubject(EMPTY_SENSOR);
+  error$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   page: number = 0;
 
   searchString: string = '';
@@ -32,7 +36,7 @@ export class SensorsPageComponent implements OnInit {
   */
   lastSearchedValue: string = '';
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router, private sensorsService: SensorsService) {}
 
   ngOnInit(): void {
     this.loadSensorsByPage();
@@ -40,7 +44,7 @@ export class SensorsPageComponent implements OnInit {
 
   openDialog(sensor: Sensor) {
     this.isDialogOpen = true;
-    this.selectedSensor = sensor;
+    this.selectedSensor$.next(sensor);
   }
 
   openCreationDialog() {
@@ -53,9 +57,22 @@ export class SensorsPageComponent implements OnInit {
     }
   }
 
+  saveSensor(data: {body: SensorUpdateRequest, id: number | null}) {
+    if(data.id !== null) {
+      this.sensorsService.updateSensor(data.id, data.body).subscribe({
+        next: () => {
+          this.selectPage(0);
+          this.cancelDialog();
+          this.error$.next(null);
+        },
+        error: response => this.error$.next(response.error.msg)
+      });
+    }
+  }
+
   cancelDialog() {
     this.isDialogOpen = false;
-    this.selectedSensor = null;
+    this.selectedSensor$.next(EMPTY_SENSOR);
   }
 
   logout() {

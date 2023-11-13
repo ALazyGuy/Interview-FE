@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { JwtResponse } from 'src/app/auth/models/jwt-response';
 import { LoginRequest } from 'src/app/auth/models/login-request';
 import { RoleResponse } from 'src/app/auth/models/role-response';
+import { PopupData } from 'src/app/sensors/models/popup-data';
+import { SensorUpdateRequest } from 'src/app/sensors/models/sensor-update-request';
 import { SensorsResponse } from 'src/app/sensors/models/sensors-response';
 
 @Injectable({
@@ -27,6 +29,14 @@ export class ApiService {
 
   deleteSensor(id: number): Observable<any> {
     return this.http.delete(`sensor/delete/${id}`);
+  }
+
+  loadPopupData(): Observable<PopupData> {
+    return this.http.get<PopupData>('sensor/popup');
+  }
+
+  updateSensor(id: number, body: SensorUpdateRequest): Observable<any> {
+    return this.http.put(`sensor/${id}`, body);
   }
 
 }

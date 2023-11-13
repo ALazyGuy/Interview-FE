@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
-import { SersorsService } from "src/app/sensors/services/sersors.service";
-import { deleteSensor, loadSensors, loadSensorsFailure, loadSensorsSuccess } from "./sensor.actions";
+import { SensorsService } from "src/app/sensors/services/sersors.service";
+import { deleteSensor, loadPopupData, loadPopupDataError, loadPopupDataSuccess, loadSensors, loadSensorsFailure, loadSensorsSuccess } from "./sensor.actions";
 
 @Injectable()
 export class SensorEffects {
 
-    constructor(private actions$: Actions, private sensorsService: SersorsService) {}
+    constructor(private actions$: Actions, private sensorsService: SensorsService) {}
 
     loadSensors$ = createEffect(() =>
         this.actions$.pipe(
@@ -28,4 +28,13 @@ export class SensorEffects {
         )
     );
 
+    loadPopupData$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(loadPopupData),
+            switchMap(() => this.sensorsService.loadPopupData().pipe(
+                map(response => loadPopupDataSuccess(response)),
+                catchError(() => of(loadPopupDataError()))
+            ))
+        )
+    );
 }

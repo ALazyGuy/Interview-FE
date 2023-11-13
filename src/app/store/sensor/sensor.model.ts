@@ -9,3 +9,15 @@ export interface Sensor {
     location: string;
     description: string;
 };
+
+export const EMPTY_SENSOR: Sensor = {
+    id: -1,
+    name: '',
+    model: '',
+    from: 0,
+    to: 0,
+    type: '',
+    unit: '',
+    location: '',
+    description: ''
+};

@@ -11,3 +11,8 @@ export const selectTotalSensors = createSelector(
     selectSensors,
     (state: SensorState) => state.total
 );
+
+export const selectPopupData = createSelector(
+    selectSensors,
+    (state: SensorState) => ({units: state.units, types: state.types})
+);

@@ -31,11 +31,15 @@
         <div class="paging" *ngIf="total$ | async as total">
             <div class="buttons">
                 <button (click)="previousPage()">Previous</button>
-                <button *ngFor="let _ of countPages(total); let i = index" (click)="selectPage(i)">{{ i + 1 }}</button>
+                <button *ngFor="let _ of countPages(total); let i = index" [class.selected]="page === i" (click)="selectPage(i)">{{ i + 1 }}</button>
                 <button (click)="nextPage(total)">Next</button>
             </div>
             <span>Total: {{ total }}</span>
         </div>
     </div>
 </div>
-<app-sensor-popup [isOpen]="isDialogOpen" (onCancel)="cancelDialog()" [sensor]="selectedSensor"></app-sensor-popup>
+<app-sensor-popup [isOpen]="isDialogOpen" 
+    [sensor$]="selectedSensor$" 
+    [error$]="error$"
+    (onCancel)="cancelDialog()"
+    (onSave)="saveSensor($event)"></app-sensor-popup> 

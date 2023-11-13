@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 import { SensorsResponse } from '../models/sensors-response';
+import { PopupData } from '../models/popup-data';
+import { SensorUpdateRequest } from '../models/sensor-update-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SersorsService {
+export class SensorsService {
 
   constructor(private apiService: ApiService) { }
 
@@ -16,6 +18,14 @@ export class SersorsService {
 
   deleteSensor(id: number): Observable<any> {
     return this.apiService.deleteSensor(id);
+  }
+
+  loadPopupData(): Observable<PopupData> {
+    return this.apiService.loadPopupData();
+  }
+
+  updateSensor(id: number, body: SensorUpdateRequest): Observable<any> {
+    return this.apiService.updateSensor(id, body);
   }
 
 }

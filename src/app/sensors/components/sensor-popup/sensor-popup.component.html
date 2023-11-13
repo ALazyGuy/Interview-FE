@@ -1,53 +1,56 @@
 <div class="wrapper" *ngIf="isOpen">
-    <div class="container">
+    <div class="container" *ngIf="popupData$ | async as popupData">
         <h1>Add/edit</h1>
     
-        <form>
+        <form [formGroup]="formGroup" *ngIf="sensor$ | async as sensor">
             <div class="input required">
                 <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Name" [value]="sensor?.name">
+                <input type="text" id="name" placeholder="Name" formControlName="name">
             </div>
             <div class="input required">
                 <label for="model">Model</label>
-                <input type="text" id="model" placeholder="Model" [value]="sensor?.model">
+                <input type="text" id="model" placeholder="Model" formControlName="model">
             </div>
             <div class="input range">
                 <label for="from">Range</label>
                 <div class="ranges">
                     <div class="from">
-                        <input type="number" id="from" placeholder="10" [value]="sensor?.from">
+                        <input type="number" id="from" placeholder="10" formControlName="from">
                     </div>
                     <div class="to">
-                        <input type="number" id="to" placeholder="20" [value]="sensor?.to">
+                        <input type="number" id="to" placeholder="20" formControlName="to">
                     </div>
                 </div>
             </div>
             <div class="input required">
                 <label for="type">Type</label>
-                <select type="text" id="type">
-                    <option value="Pressure">Pressure</option>
-                    <option value="val2">Value2</option>
+                <select type="text" id="type" formControlName="type">
+                    <option *ngFor="let type of popupData.types" 
+                    [selected]="sensor.type === type ? 'selected': ''" 
+                    [value]="type">{{ type }}</option>
                 </select>
             </div>
             <div class="input required">
                 <label for="unit">Unit</label>
-                <select type="text" id="unit">
-                    <option value="val2">Value2</option>
-                    <option value="bar">bar</option>
+                <select type="text" id="unit" formControlName="unit">
+                    <option *ngFor="let unit of popupData.units" 
+                    [selected]="sensor.unit === unit ? 'selected': ''" 
+                    [value]="unit">{{ unit }}</option>
                 </select>
             </div>
             <div class="input">
                 <label for="location">Location</label>
-                <input type="text" id="location" placeholder="Location" [value]="sensor?.location">
+                <input type="text" id="location" placeholder="Location" formControlName="location">
             </div>
             <div class="input">
                 <label for="description">Description</label>
-                <textarea type="text" id="description" placeholder="Description" [value]="sensor?.description"></textarea>
+                <textarea type="text" id="description" placeholder="Description" formControlName="description"></textarea>
             </div>
             <div class="controls">
-                <button>Save</button>
+                <button (click)="save()">Save</button>
                 <button (click)="cancel()">Cancel</button>
             </div>
+            <span *ngIf="error$ | async as error">{{ error }}</span>
         </form>
     </div>
 </div>

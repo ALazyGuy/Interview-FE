@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { loadSensors, loadSensorsFailure, loadSensorsSuccess } from "./sensor.actions";
+import { loadPopupDataError, loadPopupDataSuccess, loadSensors, loadSensorsFailure, loadSensorsSuccess } from "./sensor.actions";
 import { initialSensorState } from "./sensor.state";
 
 export const SensorReducer = createReducer(
@@ -10,11 +10,22 @@ export const SensorReducer = createReducer(
         loading: false, 
         error: null,
         total: total,
+        status: 'success',
         sensors: loadedSensors})),
     on(loadSensorsFailure, (state, {error}) => ({
         ...state, 
         loading: false, 
         sensors: [],
         total: 0,
-        error: error}))
+        error: error})),
+    on(loadPopupDataSuccess, (state, {units, types}) => ({
+        ...state,
+        units: units,
+        types: types
+    })),
+    on(loadPopupDataError, state => ({
+        ...state,
+        types: [],
+        units: []
+    }))
 );
